@@ -1,8 +1,12 @@
 div {
-    font-family: Futura, Nunito, sans-serif;
     background-color: #f4c533;
     letter-spacing: 0.75px;
     line-height: 1.4;
-    margin: auto;
+    margin:  0 auto;
     padding: 0;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Century Gothic", sans-serif;
   }
