@@ -30,6 +30,7 @@ const HeaderWrapper = styled.div`
     }
     ul a:visited {
         text-decoration: none;
+        color: #fff;
     }
     ul li:hover {
         background-color: #c03238;
@@ -41,10 +42,10 @@ const Header = () => (
         <ul>
             <li><a href="#quemsomos">QUEM SOMOS</a></li>
             <li><a href="#loja">LOJINHA</a></li>
+            <li><a href="#lojaRodape">CONTATO</a></li>
             <li><a href="#horario">HORÁRIO</a></li>
             <li><a href="#cardapio">CARDÁPIO</a></li>
             <li><a href="#eventos">EVENTOS</a></li>
-            <li><a href="#contato">CONTATO</a></li>
         </ul>
     </HeaderWrapper>
 )

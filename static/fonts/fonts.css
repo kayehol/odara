@@ -1,0 +1,9 @@
+@font-face {
+    font-family: African;
+    src: url("african.ttf") format("ttf");
+}
+
+@font-face {
+    font-family: Futura;
+    src: url("futura.ttf") format("ttf");
+}
