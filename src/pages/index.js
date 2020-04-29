@@ -15,6 +15,7 @@ const HomeWrapper = styled.div`
     flex-direction: column;
     align-items:center;
     justify-content: center;
+    margin: 0;
     #logo {
         margin: 25px 0 25px 0;
     }
@@ -22,6 +23,7 @@ const HomeWrapper = styled.div`
         width: 100%;
         margin-top: 20px;
     }
+    background-color: #f4c533;
 `
 
 const Home = () => (
@@ -207,11 +209,13 @@ const Lojinha = (props) =>
     .quemSomosHeader {
         text-align: center;
         position: relative;
+        margin: 0;
     }
     .quemSomosHeader h1 {
         padding: 50px 0 0 0;
         font-size: 4em;
         font-family: African;
+        margin: 0;
     }
     #quemSomosSubHeader h3 {
         margin: auto;
@@ -278,6 +282,7 @@ const Lojinha = (props) =>
         transform: scaleX(-1);
         background: rgba(0, 128, 0, 0);
     }
+    margin: 0;
   `
   
   const QuemSomos = () => (
@@ -365,7 +370,6 @@ const produtos = [
     {nome: 'TARECO DE RAPADURA', peso: '350g', preco: '15,00'},
     {nome: 'BISCOITINHOS DE BATATA DOCE', peso: '350g', preco: '15,00'},
     {nome: 'AMANTEIGADO ROMEU E JULIETA', peso: '350g', preco: '15,00'},
-    {nome: 'GELEIA DE FRUTAS', peso: '350g', preco: '15,00', sabores: ['uva','cajá','umbu','goiaba','acerola','abacaxi','maracujá']},
     {nome: 'GELEIA DE PIMENTA DE CHEIRO SUAVE', peso: '350g', preco: '15,00'},
     {nome: 'GELEIA DE PIMENTA DE CHEIRO PICANTE', peso: '350g', preco: '15,00'},
     {nome: 'GELEIA DE PIMENTA DE CHEIRO SABORIZADA', peso: '350g', preco: '20,00', sabores: ['laranja','abacaxi','maracujá','damasco']},

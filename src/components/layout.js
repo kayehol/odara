@@ -1,5 +1,6 @@
 import React from "react"
 import "./layout.css"
+import ScrollTop from '@nzambello/react-scrolltop'
 import styled from "styled-components"
 
 const HeaderWrapper = styled.div`
@@ -63,7 +64,7 @@ const FooterWrapper = styled.div`
 const Footer = () => (
     <FooterWrapper>
         <p>© 2020 - Kayê Holanda</p>
-    </FooterWrapper>
+    </FooterWrapper>    
 )
 
 export default ({ children }) => (
@@ -71,5 +72,6 @@ export default ({ children }) => (
         <Header />
             {children}
         <Footer />
+        <ScrollTop />
     </div>
 ) 
