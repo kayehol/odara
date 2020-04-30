@@ -151,21 +151,37 @@ const LojinhaWrapper = styled.div`
         font-size: 1.5em;
     }
     #lojaBody table td {
-        padding: 20px 0 0 20px;
+        padding: 20px 0 10px 20px;
         border-bottom: 3px solid;
+        margin: 0;
     }
 `
 
-const ListItem = (props) => {
-    return(
+const ListItem = (props) => (
+    <tbody>
         <tr>
             <td>{props.value}</td>
             <td>{props.peso}</td>
             <td>R${props.preco}</td>
         </tr>
-    )
-}
-
+        {props.sabores &&
+            <tr>
+                <td style={{border: 'none', width: "100%"}} colSpan="3">
+                    {props.sabores.join(' · ')}
+                </td>
+            </tr>
+        }
+        {props.saboresCompotas &&
+            props.saboresCompotas.map((sabor)=>
+                <tr>
+                    <td>{sabor.nome}</td>
+                    <td></td>
+                    <td>{sabor.preco}</td>
+                </tr>
+            )
+        }
+    </tbody>
+)
 
 const Lojinha = (props) => 
   {
@@ -175,11 +191,12 @@ const Lojinha = (props) =>
             <h1 id="loja">LOJINHA</h1>
             <div id="lojaBody">
                 <table>
-                    {produtos.map((produto) =>
-                        <ListItem key={produto.nome.toString()}
-                            value={produto.nome} peso={produto.peso} preco={produto.preco}
-                            sabores={produto.sabores} />
-                    )}
+                        {produtos.map((produto) =>
+                            <ListItem key={produto.nome.toString()}
+                                value={produto.nome} peso={produto.peso} preco={produto.preco} sabores={produto.sabores}
+                                saboresCompotas={produto.saboresCompotas}
+                                />
+                        )}
                 </table>
                 <div id="lojaRodape">
                     <div id="lojaContato">
@@ -362,17 +379,23 @@ const Eventos = () => {
 
 
 const produtos = [
-    {nome: 'COCADA EM CALDA', peso: '350g', preco: '15,00', sabores: ['caju', 'maracujá','siriguela', 'abacaxi ao vinho']},
+    {nome: 'COCADA EM CALDA', peso: '350g', preco: '15,00', 
+        sabores: ['caju', 'maracujá','siriguela', 'abacaxi ao vinho']
+    },
     {nome: 'DOCE DE ABÓBORA COM COCO', peso: '350g', preco: '18,00'},
     {nome: 'DOCE DE BANANA', peso: '350g', preco: '10,00'},
     {nome: 'DOCE DE LEITE', peso: '350g', preco: '15,00'},
-    {nome: 'GELEIA DE FRUTAS', peso: '350g', preco: '15,00', sabores: ['uva','cajá','umbu','goiaba','acerola','abacaxi','maracujá']},
+    {nome: 'GELEIA DE FRUTAS', peso: '350g', preco: '15,00', 
+        sabores: ['uva','cajá','umbu','goiaba','acerola','abacaxi','maracujá']
+    },
     {nome: 'TARECO DE RAPADURA', peso: '350g', preco: '15,00'},
     {nome: 'BISCOITINHOS DE BATATA DOCE', peso: '350g', preco: '15,00'},
     {nome: 'AMANTEIGADO ROMEU E JULIETA', peso: '350g', preco: '15,00'},
     {nome: 'GELEIA DE PIMENTA DE CHEIRO SUAVE', peso: '350g', preco: '15,00'},
     {nome: 'GELEIA DE PIMENTA DE CHEIRO PICANTE', peso: '350g', preco: '15,00'},
-    {nome: 'GELEIA DE PIMENTA DE CHEIRO SABORIZADA', peso: '350g', preco: '20,00', sabores: ['laranja','abacaxi','maracujá','damasco']},
+    {nome: 'GELEIA DE PIMENTA DE CHEIRO SABORIZADA', peso: '350g', preco: '20,00', 
+        sabores: ['laranja','abacaxi','maracujá','damasco']
+    },
     {nome: 'COMPOTAS', peso: '350g', saboresCompotas: [
         {nome: 'jaca', preco: '15,00'},
         {nome: 'caju', preco: '15,00'},
