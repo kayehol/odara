@@ -1,14 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 import Layout from "../components/layout"
-import logo from "./logoPrincipal.png";
+import logo from "./logoPrincipal.png"
 import padrao from "./padrao1.png"
 import email from "./email.png"
 import whatsapp from "./whatsapp.png"
 import fotoLoja from "./fotoLoja.jpeg"
 import fotoQuemSomos from "./fotoQuemSomos.jpeg"
 import ondaBranca from "./ondaBranca.png"
-import ondaPreta from "./ondaPreta.png"
+/*import ondaPreta from "./ondaPreta.png"*/
 
 const HomeWrapper = styled.div`
     display: flex;
@@ -16,21 +16,37 @@ const HomeWrapper = styled.div`
     align-items:center;
     justify-content: center;
     margin: 0;
+    background-color: #f4c533;
     #logo {
         margin: 25px 0 25px 0;
+        width: 50%;
     }
-    #padrao{
+    #padrao-baixo{
         width: 100%;
         margin-top: 20px;
     }
-    background-color: #f4c533;
+    #padrao-topo{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    @media only screen and (max-width: 720px){
+        #logo {
+            width: 100%;
+        }
+        #padrao-baixo {
+            margin-top: 5px;
+        }
+        #padrao-topo {
+            margin-bottom: 5px;
+        }
+    }
 `
 
 const Home = () => (
     <HomeWrapper>
-        <img src={padrao} alt="Odara" id="padrao"/>
-        <img src={logo} alt="Logo Odara" width="50%" id="logo" />
-        <img src={padrao} alt="Odara" id="padrao"/>
+        <img src={padrao} alt="Odara" id="padrao-topo"/>
+        <img src={logo} alt="Logo Odara" id="logo" />
+        <img src={padrao} alt="Odara" id="padrao-baixo"/>
     </HomeWrapper>
 )
 
@@ -43,7 +59,7 @@ const HorarioWrapper = styled.div`
     justify-content: center;
     position: relative;
     #horario {
-        padding: 25px 0 25px 0;
+        justify-content: center;
         font-size: 4em;
         font-family: African;
     }
@@ -61,7 +77,7 @@ const HorarioWrapper = styled.div`
         text-decoration: underline;
         color: #fff;
     }
-    #ondaPreta1 {
+    #ondaBranca1 {
         position: absolute;
         top: 0;
         left: 0;
@@ -69,7 +85,7 @@ const HorarioWrapper = styled.div`
         background: rgba(0, 128, 0, 0);
         transform: scaleX(-1);
     }
-    #ondaPreta2 {
+    #ondaBranca2 {
         position: absolute;
         bottom: 0;
         right: 0;
@@ -77,6 +93,23 @@ const HorarioWrapper = styled.div`
         background: rgba(0, 128, 0, 0);
         transform: scaleY(-1);
         width: 20%;
+    }
+    @media only screen and (max-width: 720px){
+        #horario {
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+            z-index: 1;
+        }
+        .horarioBody {
+            width: 100%;
+            font-size: 1.2em;
+            justify-content: center;
+            z-index: 1;
+        }
+        #ondaBranca2 {
+            display: none;
+        }
     }
 `
 
@@ -90,8 +123,8 @@ const Horario = () => (
                 Não temos pronta entrega, apenas encomendas.
             </h2>
         </div>
-        <img src={ondaPreta} alt="Onda preta 1" id="ondaPreta1" />
-        <img src={ondaPreta} alt="Onda preta 2" id="ondaPreta2" />
+        <img src={ondaBranca} alt="Onda preta 1" id="ondaBranca1" />
+        <img src={ondaBranca} alt="Onda preta 2" id="ondaBranca2" />
     </HorarioWrapper>
 )
 
@@ -114,7 +147,7 @@ const LojinhaWrapper = styled.div`
         flex-direction: row;
         padding: 90px 0 90px 0;
     }
-    #lojaRodape img {
+    #fotoLoja {
         margin: auto;
         border-radius: 50%;
     }
@@ -154,6 +187,20 @@ const LojinhaWrapper = styled.div`
         padding: 20px 0 10px 20px;
         border-bottom: 3px solid;
         margin: 0;
+    }
+    @media only screen and (max-width: 720px){
+        #lojaRodape {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0px;
+        }
+        #fotoLoja {
+            margin-top: 40px;
+            width: 75%;
+        }
+        #lojaBody table{
+            width: 100%;
+        }
     }
 `
 
@@ -300,13 +347,46 @@ const Lojinha = (props) =>
         background: rgba(0, 128, 0, 0);
     }
     margin: 0;
-  `
+    @media only screen and (max-width: 720px){
+        .quemSomosHeader {
+            width: 100%;
+        }
+        #quemSomosSubHeader {
+            display: flex;
+            flex-direction: column
+        }
+        #quemSomosSubHeader h3 {
+            margin-top: 20px;
+            z-index: 1;
+        }
+        #quemSomosSubHeader img {
+            margin-top: 40px;
+            width: 65%;
+        }
+        .quemSomosBody {
+            display: flex;
+            flex-direction: column;
+            font-size: 1.5em;
+            text-align: center;
+            margin-top: 0;
+            padding-top: 0;
+        }
+        #valores {
+            text-align: center;
+            width: 70%;
+        }
+        #ondaBranca2 {
+            display: none;
+        }
+    }
+`
   
   const QuemSomos = () => (
       <QuemSomosWrapper>
           <div className="quemSomosHeader" id="quemsomos">
             <h1>QUEM SOMOS</h1>
-            <div id="quemSomosSubHeader">                <h3>
+            <div id="quemSomosSubHeader">
+                <h3>
                     O restaurante Odara traz uma proposta de ancestralidade e valorização da cultura e da gastronomia afro-brasileira.
                 </h3>
                 <img src={fotoQuemSomos} alt="Pimentas Odara" width="35%"/>
