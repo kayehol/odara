@@ -1,8 +1,13 @@
 import React from "react"
 import "./layout.css"
-import ScrollTop from "@nzambello/react-scrolltop"
+import loadable from "@loadable/component"
+/*import ScrollTop from "@nzambello/react-scrolltop"*/
 import styled from "styled-components"
 import { bubble as Menu } from "react-burger-menu"
+import instaLogo from "./insta.png"
+import SEO from "../components/seo"
+
+const ScrollTop = loadable(() => import("@nzambello/react-scrolltop"))
 
 const HeaderWrapper = styled.div`
   background-color: #000000;
@@ -217,20 +222,53 @@ const FooterWrapper = styled.div`
   background-color: #000000;
   color: #ffffff;
   display: flex;
+  flex-direction: column;
+  text-align: center;
   justify-content: center;
-  padding: 30px;
+  padding: 50px;
   margin: 0;
-  font-size: 0.8em;
+  font-size: 1em;
+  a {
+    width: auto;
+  }
+  a:link {
+    text-decoration: underline;
+    color: #fff;
+  }
+  a:visited {
+    color: #fff;
+  }
+  #kayeNome {
+    padding-top: 40px;
+    font-size: 0.8em;
+  }
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  }
+ 
 `
 
 const Footer = () => (
   <FooterWrapper>
-    <p>© 2020 - Kayê Holanda</p>
+    <p>
+      <a href="https://wa.me/5582991214966" target="_blank" rel="noopener noreferrer">(82)99121-4966</a>
+    </p>
+    <p>
+      <a href="mailto:adm.odararestaurante@gmail.com">adm.odararestaurante@gmail.com</a>
+    </p>
+    <a href="https://www.instagram.com/odararestaurante/" target="_blank" rel="noopener noreferrer">
+      <img src={instaLogo} alt="Instagram" width="64px" height="64px" id="logoInsta" />
+    </a>
+    <p id="kayeNome">© 2020 Kayê Holanda</p>
   </FooterWrapper>
 )
 
 export default ({ children }) => (
   <div>
+    <SEO title="Odara Restaurante" lang="pt-br" />
     <Header />
     {children}
     <Footer />

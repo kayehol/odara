@@ -8,7 +8,12 @@ import whatsapp from "./whatsapp.png"
 import fotoLoja from "./fotoLoja.jpeg"
 import fotoQuemSomos from "./fotoQuemSomos.jpeg"
 import ondaBranca from "./ondaBranca.png"
-/*import ondaPreta from "./ondaPreta.png"*/
+import ReactGA from "react-ga"
+
+function initializeReactGA() {
+    ReactGA.initialize('UA-165900894-1');
+    ReactGA.pageview('/homepage');
+}
 
 const HomeWrapper = styled.div`
     display: flex;
@@ -172,6 +177,18 @@ const LojinhaWrapper = styled.div`
     #lojaFone img {
         margin: 0;
     }
+    #lojaFone h2 a:link {
+        text-decoration: underline;
+        color: #fff;
+    }
+    #lojaFone h2 a:visited {
+        text-decoration: underline;
+        color: #fff;
+    }
+    #lojaEmail h2 a:link {
+        text-decoration: underline;
+        color: #fff;
+    }
     #lojaEmail {
         background-color: #d98236;
         display: flex;
@@ -250,11 +267,11 @@ const Lojinha = (props) =>
                         <h2 id="entre">Entre em contato!</h2>
                         <div id="lojaFone">
                             <img src={whatsapp} alt="Whatsapp" width="64px" height="64px"/>
-                            <h2>(82)99121-4966</h2>
+                            <h2><a href="https://wa.me/5582991214966" target="_blank" rel="noopener noreferrer">(82)99121-4966</a></h2>
                         </div>
                         <div id="lojaEmail">
                             <img src={email} alt="E-mail" width="64px" height="64px" />
-                            <h2>adm.odararestaurante@gmail.com</h2>
+                            <h2><a href="mailto:adm.odararestaurante@gmail.com">adm.odararestaurante@gmail.com</a></h2>
                         </div>
                     </div>
                     <img id="fotoLoja" src={fotoLoja} alt="Produtos" width="35%" />
