@@ -1,9 +1,16 @@
 @font-face {
-    font-family: African;
-    src: url("african.ttf") format("ttf");
+    font-family: 'African';
+    src: url("african.ttf") format("truetype"),
+         url("african.eot"),
+         url("african.otf") format("opentype"),
+         url("african.woff") format("woff"),
+         url("african.woff2") format("woff2"),
+         url("african.svg#svgFontName") format("svg");
 }
 
 @font-face {
-    font-family: Futura;
-    src: url("futura.ttf") format("ttf");
+    font-family: 'Futura';
+    src: url("futura.ttf") format("truetype"),
+         url('futura.woff') format('woff'),
+         url('futura.woff2') format('woff2');
 }

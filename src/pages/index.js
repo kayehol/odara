@@ -1,6 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import Layout from "../components/layout"
+import "../../static/fonts/fonts.css"
+
 import logo from "./logoPrincipal.png"
 import padrao from "./padrao1.png"
 import email from "./email.png"
@@ -10,10 +12,10 @@ import fotoQuemSomos from "./fotoQuemSomos.jpeg"
 import ondaBranca from "./ondaBranca.png"
 import ReactGA from "react-ga"
 
-function initializeReactGA() {
-    ReactGA.initialize('UA-165900894-1');
-    ReactGA.pageview('/homepage');
-}
+
+ReactGA.initialize('UA-165900894-1');
+ReactGA.pageview('/homepage');
+
 
 const HomeWrapper = styled.div`
     display: flex;
@@ -37,6 +39,7 @@ const HomeWrapper = styled.div`
     @media only screen and (max-width: 720px){
         #logo {
             width: 100%;
+            padding: 80px 0;
         }
         #padrao-baixo {
             margin-top: 5px;
@@ -57,6 +60,7 @@ const Home = () => (
 
 const HorarioWrapper = styled.div`
     background-color: #f4c533;
+    font-family: Futura;
     color: #000;
     display:flex;
     flex-direction: column;
@@ -108,12 +112,20 @@ const HorarioWrapper = styled.div`
         }
         .horarioBody {
             width: 100%;
-            font-size: 1.2em;
+            font-size: 1em;
             justify-content: center;
             z-index: 1;
         }
         #ondaBranca2 {
             display: none;
+        }
+    }
+    @media only screen and (max-width: 480px){
+        #horario {
+            font-size: 3em;
+        }
+        #ondaBranca1 {
+            width: 75%;
         }
     }
 `
@@ -135,6 +147,7 @@ const Horario = () => (
 
 const LojinhaWrapper = styled.div`
     background-color: #d98236;
+    font-family: Futura;
     color: #fff;
     #loja {
         padding: 50px 0 0 0;
@@ -157,7 +170,7 @@ const LojinhaWrapper = styled.div`
         border-radius: 50%;
     }
     #lojaContato {
-        margin: auto;
+        margin: 0;
         border-style: solid;
         padding: 20px;
         background-color: #d98236;
@@ -206,17 +219,58 @@ const LojinhaWrapper = styled.div`
         margin: 0;
     }
     @media only screen and (max-width: 720px){
+        font-size: 0.8em;
         #lojaRodape {
             display: flex;
             flex-direction: column;
-            margin-bottom: 0px;
+            margin: 0px;
+            padding: 20px;
         }
         #fotoLoja {
             margin-top: 40px;
             width: 75%;
         }
         #lojaBody table{
-            width: 100%;
+            width: 75%;
+            margin: auto;
+            padding: 35px;
+            font-size: 1.5em;
+        }
+        #lojaContato img {
+            width: 32px;
+            height: 32px;
+        }
+        #lojaContato {
+            margin: 0;
+            
+        }
+        #lojaFone {
+            align-items: center;
+        }
+        #lojaEmail {
+            align-items: center;
+        }
+        #lojaEmail h2 {
+            font-size: 1.3em;
+        }
+    }
+    @media only screen and (max-width: 320px) {
+        #lojaBody table {
+            font-size: 1em;
+            padding: 25px 15px;
+        }
+        #lojaFone {
+            flex-direction: column;
+        }
+        #lojaEmail {
+            flex-direction: column;
+        }
+        #lojaEmail h2 {
+            font-size: 0.9em;
+            text-align: center;
+        }
+        #ondaBranca1 {
+            width: 65%;
         }
     }
 `
@@ -286,6 +340,7 @@ const Lojinha = (props) =>
     * {
         background-color: #c03238;
         color: #fff;
+        font-family: Futura;
     }
     .quemSomosHeader {
         text-align: center;
@@ -298,55 +353,51 @@ const Lojinha = (props) =>
         font-family: African;
         margin: 0;
     }
-    #quemSomosSubHeader h3 {
-        margin: auto;
-        font-size: 2em;
-        width: 500px;
-        padding: 40px;
-        border: solid 2px;
-        justify-content: center;
-    }
+    
     #quemSomosSubHeader{
         display: flex;
         flex-direction: row;
     }
-   
+    #quemSomosSubHeader h3 {
+        font-size: 2em;
+        padding: 20px;
+        margin: 80px 100px;
+        vertical-align: middle;
+        border: solid 2px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+    }
     #quemSomosSubHeader img{
-       margin: auto;
-       z-index: 1;
+       z-index: 0;
        border-radius: 50%;
+       width: 100%;
+       align-items: center;
+       margin: auto;
+       padding: 20px 80px;
     }
     .quemSomosBody {
         margin: 0;
         display: flex;
         flex-direction: row;
-        padding: 80px 80px 80px 100px;
-        width: auto;
+        justify-content: flex-start;
     }
-    #missao  {
-        padding-right: 60px;
-    }
-    #missao h2 {
+    .quemSomosBody h2 {
         text-align: center;
         text-decoration: underline;
     }
-    #visao  {
-        padding-right: 60px;
-    }
-    #visao h2 {
+    #missao {
         text-align: center;
-        text-decoration: underline;
+        padding: 40px;
     }
-    #valores  {
-        padding-right: 60px;
-    }
-    #valores h2 {
+    #visao {
         text-align: center;
-        text-decoration: underline;
+        padding: 40px;
     }
-    #valores ul {
-        list-style-type: none;
-        font-size: 1.5em;
+    #valores {
+        text-align: center;
+        padding: 40px 120px;
     }
     #ondaBranca1 {
         position: absolute;
@@ -368,32 +419,55 @@ const Lojinha = (props) =>
         .quemSomosHeader {
             width: 100%;
         }
+        
         #quemSomosSubHeader {
             display: flex;
             flex-direction: column
         }
         #quemSomosSubHeader h3 {
-            margin-top: 20px;
             z-index: 1;
         }
         #quemSomosSubHeader img {
-            margin-top: 40px;
-            width: 65%;
+            width: 85%;
+            padding: 20px;
         }
         .quemSomosBody {
             display: flex;
             flex-direction: column;
-            font-size: 1.5em;
+            font-size: 1.3em;
             text-align: center;
-            margin-top: 0;
+            margin: 0;
             padding-top: 0;
-        }
-        #valores {
-            text-align: center;
-            width: 70%;
         }
         #ondaBranca2 {
             display: none;
+        }
+    }
+    @media only screen and (max-width: 480px){
+        #quemSomosSubHeader h3 {
+            font-size: 1.5em;
+            margin: 0;
+            width: 90%;
+        }
+    }
+    @media only screen and (max-width: 320px){
+        #quemSomosSubHeader h3 {
+            font-size: 1.2em;
+            margin: 40px auto;
+            width: 75%;
+        }
+        #ondaBranca1 {
+            width: 75%;
+        }
+        #valores {
+            margin: 0;
+            padding: 20px 40px;
+        }
+        #missao {
+            padding: 20px 40px;
+        }
+        #visao {
+            padding: 20px 40px;
         }
     }
 `
@@ -406,7 +480,7 @@ const Lojinha = (props) =>
                 <h3>
                     O restaurante Odara traz uma proposta de ancestralidade e valorização da cultura e da gastronomia afro-brasileira.
                 </h3>
-                <img src={fotoQuemSomos} alt="Pimentas Odara" width="35%"/>
+                <img src={fotoQuemSomos} alt="Pimentas Odara"/>
             </div>
             <img src={ondaBranca} alt="Onda branca" id="ondaBranca1" />
             <img src={ondaBranca} alt="Onda branca" id="ondaBranca2" />
@@ -426,11 +500,9 @@ const Lojinha = (props) =>
             </div>
             <div id="valores">
                 <h2>VALORES</h2>
-                <ul>
-                    <li>Ancestralidade</li>
-                    <li>Respeito</li>
-                    <li>Diversidade</li>
-                </ul>
+                <h3>Ancestralidade</h3>
+                <h3>Respeito</h3>
+                <h3>Diversidade</h3>
             </div>
           </div>        
       </QuemSomosWrapper>

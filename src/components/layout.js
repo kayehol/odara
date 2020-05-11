@@ -1,5 +1,6 @@
 import React from "react"
 import "./layout.css"
+import "../../static/fonts/fonts.css"
 import loadable from "@loadable/component"
 /*import ScrollTop from "@nzambello/react-scrolltop"*/
 import styled from "styled-components"
@@ -248,7 +249,9 @@ const FooterWrapper = styled.div`
     margin-right: auto;
     margin-top: 10px;
   }
- 
+  @media only screen and (max-width: 320px) {
+    font-size: 0.8em;
+  }
 `
 
 const Footer = () => (
