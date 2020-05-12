@@ -254,6 +254,25 @@ const LojinhaWrapper = styled.div`
             font-size: 1.3em;
         }
     }
+    @media only screen and (max-width: 420px) {
+        #lojaBody table {
+            font-size: 1.4em;
+            padding: 25px 15px;
+        }
+        #lojaFone {
+            flex-direction: column;
+        }
+        #lojaEmail {
+            flex-direction: column;
+        }
+        #lojaEmail h2 {
+            font-size: 1.1em;
+            text-align: center;
+        }
+        #ondaBranca1 {
+            width: 65%;
+        }
+    }
     @media only screen and (max-width: 320px) {
         #lojaBody table {
             font-size: 1em;
@@ -443,11 +462,24 @@ const Lojinha = (props) =>
             display: none;
         }
     }
-    @media only screen and (max-width: 480px){
+    @media only screen and (max-width: 420px){
         #quemSomosSubHeader h3 {
             font-size: 1.5em;
+            margin: 40px auto;
+            width: 80%;
+        }
+        #ondaBranca1 {
+            width: 85%;
+        }
+        #valores {
             margin: 0;
-            width: 90%;
+            padding: 20px 40px;
+        }
+        #missao {
+            padding: 20px 40px;
+        }
+        #visao {
+            padding: 20px 40px;
         }
     }
     @media only screen and (max-width: 320px){
