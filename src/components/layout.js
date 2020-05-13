@@ -271,7 +271,7 @@ const Footer = () => (
 
 export default ({ children }) => (
   <div>
-    <SEO title="Odara Restaurante" lang="pt-br" />
+    <SEO lang="pt-br" />
     <Header />
     {children}
     <Footer />
