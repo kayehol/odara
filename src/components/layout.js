@@ -126,15 +126,16 @@ class Header extends React.Component {
                     <a href="#quemsomos" onClick={() => this.closeMenu()}>
                         QUEM SOMOS
                     </a>
+                    <a href="#horario" onClick={() => this.closeMenu()}>
+                        HORÁRIO
+                    </a>
                     <a href="#loja" onClick={() => this.closeMenu()}>
                         LOJINHA
                     </a>
                     <a href="#lojaRodape" onClick={() => this.closeMenu()}>
                         CONTATO
                     </a>
-                    <a href="#horario" onClick={() => this.closeMenu()}>
-                        HORÁRIO
-                    </a>
+                    
                     <a href="#cardapio" onClick={() => this.closeMenu()}>
                         CARDÁPIO
                     </a>
@@ -191,6 +192,21 @@ const MenuGrande = () => (
         </a>
       </li>
       <li>
+        <a href="#horario">
+          HORÁRIO
+        </a>
+      </li>
+      <li>
+        <a href="#cardapio">
+          LOCAL
+        </a>
+      </li>
+      <li>
+        <a href="#quemsomos">
+          CARDÁPIO
+        </a>
+      </li>
+      <li>
         <a href="#loja">
           LOJINHA
         </a>
@@ -198,16 +214,6 @@ const MenuGrande = () => (
       <li>
         <a href="#lojaRodape">
           CONTATO
-        </a>
-      </li>
-      <li>
-        <a href="#horario">
-          HORÁRIO
-        </a>
-      </li>
-      <li>
-        <a href="#cardapio">
-          CARDÁPIO
         </a>
       </li>
       <li>
@@ -265,7 +271,7 @@ const Footer = () => (
     <a href="https://www.instagram.com/odararestaurante/" target="_blank" rel="noopener noreferrer">
       <img src={instaLogo} alt="Instagram" width="64px" height="64px" id="logoInsta" />
     </a>
-    <p id="kayeNome">© 2020 Kayê Holanda</p>
+    <p id="kayeNome">© 2020 <a href='https://kayehol.github.io'>Kayê Holanda</a></p>
   </FooterWrapper>
 )
 

@@ -1,17 +1,15 @@
-import React from "react"
+import React, {useState} from "react"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import "../../static/fonts/fonts.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Carousel from "react-bootstrap/Carousel"
-
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+//import de imagens
 import logo from "./logoPrincipal.png"
-import padrao from "./padrao1.png"
 import email from "./email.png"
 import whatsapp from "./whatsapp.png"
 import fotoLoja from "./fotoLoja.jpeg"
-import fotoQuemSomos from "./fotoQuemSomos.jpeg"
-import ondaBranca from "./ondaBranca.png"
 import perfilNil from "./perfilNil.jpeg"
 import perfilMari from "./perfilMari.jpeg"
 import perfilAnne from "./perfilAnne.jpeg"
@@ -27,7 +25,11 @@ import pia5 from "./pia5.jpeg"
 import outros1 from "./outros1.jpeg"
 import outros2 from "./outros2.jpeg"
 import outros3 from "./outros3.jpeg"
+import cardapioAlmoco from "../images/cardapio-almoco.png"
+import cardapioJantar from "../images/cardapio-jantar.png"
+import cardapioBebidas from "../images/cardapio-bebidas.png"
 import ReactGA from "react-ga"
+import { ToggleButton } from "react-bootstrap"
 
 ReactGA.initialize("UA-165900894-1")
 ReactGA.pageview("/homepage")
@@ -38,45 +40,27 @@ const HomeWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin: 0;
-  background-color: #f4c533;
+  background-color: #fff;
   #logo {
     margin: 25px 0 25px 0;
     width: 50%;
   }
-  #padrao-baixo {
-    width: 100%;
-    margin-top: 20px;
-  }
-  #padrao-topo {
-    width: 100%;
-    margin-bottom: 20px;
-  }
   @media only screen and (max-width: 720px) {
     #logo {
       width: 100%;
-      padding: 80px 0;
-    }
-    #padrao-baixo {
-      margin-top: 5px;
-    }
-    #padrao-topo {
-      margin-bottom: 5px;
+      padding: 8em 0;
     }
   }
 `
 
 const Home = () => (
   <HomeWrapper>
-    <img src={padrao} alt="Odara" id="padrao-topo" />
     <img src={logo} alt="Logo Odara" id="logo" />
-    <img src={padrao} alt="Odara" id="padrao-baixo" />
   </HomeWrapper>
 )
 
 const HorarioWrapper = styled.div`
-  background-color: #f4c533;
   font-family: Futura;
-  color: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,35 +73,19 @@ const HorarioWrapper = styled.div`
     padding-top: 40px;
   }
   .horarioBody {
-    width: 90%;
-    text-align: center;
-    padding: 180px 120px;
-    a:visited {
-      text-decoration: underline;
-      color: #8a8787;
-    }
+    width: 100%;
+    margin: auto;
+    padding: 4em 0;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
   }
-
-  a:link {
-    text-decoration: underline;
-    color: #fff;
-  }
-  #ondaBranca1 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    background: rgba(0, 128, 0, 0);
-    transform: scaleX(-1);
-  }
-  #ondaBranca2 {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    z-index: 0;
-    background: rgba(0, 128, 0, 0);
-    transform: scaleY(-1);
-    width: 20%;
+  table, th, td {
+    border-bottom: 4px solid black;
+    margin: 0;
+    padding: 1em 2em 0 0;
+    border-spacing: 1em;
+    background-color: #ffee6e;
   }
   @media only screen and (max-width: 720px) {
     #horario {
@@ -132,19 +100,16 @@ const HorarioWrapper = styled.div`
       justify-content: center;
       z-index: 1;
     }
-    #ondaBranca2 {
-      display: none;
-    }
   }
   @media only screen and (max-width: 480px) {
     #horario {
       font-size: 3em;
     }
-    #ondaBranca1 {
-      width: 75%;
-    }
     .horarioBody {
-      padding: 90px 30px;
+      padding: 2em 1em 6em 1em;
+    }
+    table {
+      width: 100%;
     }
   }
 `
@@ -153,21 +118,152 @@ const Horario = () => (
   <HorarioWrapper>
     <h1 id="horario">HORARIO</h1>
     <div className="horarioBody">
-      <h2>
-        Devido à pandemia, estamos apenas com produtos na nossa{" "}
-        <a href="#loja">lojinha</a>.<br></br>
-        Não temos pronta entrega, apenas encomendas.
-      </h2>
+      <table>
+        <tr>
+          <td>Quarta à domingo</td>
+          <td>12-16h</td>
+        </tr>
+        <tr>
+          <td>Sexta e sábado</td>
+          <td>12-16h & 19-23h</td>
+        </tr>
+      </table>
     </div>
-    <img src={ondaBranca} alt="Onda preta 1" id="ondaBranca1" />
-    <img src={ondaBranca} alt="Onda preta 2" id="ondaBranca2" />
   </HorarioWrapper>
 )
 
+const LocalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    font-size: 4em;
+  }
+  h2 {
+    text-align: center;
+    padding: 2em 0;
+  }
+  #mapa {
+    align-self: center;
+    padding-bottom: 2em;
+    width: 90%;
+  }
+  @media only screen and (max-width: 480px) {
+    #mapa {
+      height: 100%;
+      margin: 0;
+      padding-bottom: 0;
+    }
+  }
+`
+
+const Local = () => {
+  const iframe = {
+    __html: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.2634055616845!2d-35.717907685601425!3d-9.658520104700003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7014581b681cb19%3A0xec78e60733405054!2sOdara%20Restaurante!5e0!3m2!1spt-BR!2sbr!4v1607265407544!5m2!1spt-BR!2sbr" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>'
+  }
+  return (
+    <LocalWrapper>
+      <h1>LOCAL</h1>
+      <h2>Avenida Brasil, 807 - Poço</h2>
+      <div id='mapa' dangerouslySetInnerHTML={iframe} />
+    </LocalWrapper>
+  )
+}
+
+const CardapioWrapper = styled.div`
+  height: 1300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    font-size: 4em;
+    padding-top: 1em;
+  }
+  #selectorCardapio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #selector {
+    display: flex;
+    flex-direction: row;
+    padding: 2em 0 0 2em;
+    font-size: 2em;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+  }
+  #imageSelected {
+    align-self: center;
+    padding: 2em 0;
+  }
+  @media only screen and (max-width: 480px) {
+    #imageSelected {
+      align-self: center;
+      margin: auto;
+    }
+    img {
+      align-self: center;
+      width: 95%;
+      margin: auto;
+    }
+    #selector {
+      padding: 2em 0;
+    }
+  }
+`
+
+const Cardapio = () => {
+  const [radioValue, setRadioValue] = useState('1');
+
+  const radios = [
+    {name: 'Almoço', value: '1'},
+    {name: 'Jantar', value: '2'},
+    {name: 'Bebidas', value: '3'},
+  ];
+
+  let images;
+  if (radioValue === '1') {
+    images = <img src={cardapioAlmoco} alt='cardápio almoço'></img>
+  } else if (radioValue === '2') {
+    images = <img src={cardapioJantar} alt='cardápio jantar'></img>
+  } else {
+    images = <img src={cardapioBebidas} alt='cardápio bebida'></img>
+  }
+  
+  return (
+    <CardapioWrapper>
+      <h1>CARDAPIO</h1>
+      <div id='selectorCardapio'>
+        <div id='selector'>
+         <ButtonGroup toggle>
+          {radios.map((radio, idx) => (
+            <ToggleButton
+              key={idx}
+              type='radio'
+              variant='secondary'
+              name='radio'
+              value={radio.value}
+              checked={radioValue === radio.value}
+              onChange={(e) => setRadioValue(e.currentTarget.value)}
+            >
+              {radio.name}
+            </ToggleButton>
+          ))}
+         </ButtonGroup>
+        </div>
+        <div id='imageSelected'>
+            {images}
+        </div>
+      </div>
+    </CardapioWrapper>
+  )
+}
+
 const LojinhaWrapper = styled.div`
-  background-color: #d98236;
+  background-color: #fff;
   font-family: Futura;
-  color: #fff;
+  color: #000;
   #loja {
     padding: 50px 0 0 0;
     font-size: 4em;
@@ -176,10 +272,10 @@ const LojinhaWrapper = styled.div`
     margin: 0;
   }
   #lojaBody {
-    background-color: #d98236;
+    background-color: #fff;
   }
   #lojaRodape {
-    background-color: #d98236;
+    background-color: #fff;
     display: flex;
     flex-direction: row;
     padding: 90px 0 90px 0;
@@ -192,7 +288,7 @@ const LojinhaWrapper = styled.div`
     margin: 60px;
     border-style: solid;
     padding: 20px;
-    background-color: #d98236;
+    background-color: #fff;
     font-size: 2em;
   }
   #lojaContato h2 {
@@ -203,7 +299,6 @@ const LojinhaWrapper = styled.div`
     padding: 20px 0;
   }
   #lojaFone {
-    background-color: #d98236;
     display: flex;
     flex-direction: row;
     padding: 10px;
@@ -214,18 +309,17 @@ const LojinhaWrapper = styled.div`
   }
   #lojaFone h2 a:link {
     text-decoration: underline;
-    color: #fff;
+    color: #000;
   }
   #lojaFone h2 a:visited {
     text-decoration: underline;
-    color: #fff;
+    color: #000;
   }
   #lojaEmail h2 a:link {
     text-decoration: underline;
-    color: #fff;
+    color: #000;
   }
   #lojaEmail {
-    background-color: #d98236;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -254,9 +348,9 @@ const LojinhaWrapper = styled.div`
       width: 75%;
     }
     #lojaBody table {
-      width: 75%;
+      width: 85%;
       margin: auto;
-      padding: 35px;
+      padding: 2em 0;
       font-size: 1.5em;
     }
     #lojaContato img {
@@ -312,10 +406,6 @@ const LojinhaWrapper = styled.div`
     }
     #lojaFone h2 {
       font-size: 0.8em;
-    }
-    
-    #ondaBranca1 {
-      width: 65%;
     }
   }
 `
@@ -396,8 +486,8 @@ const Lojinha = props => {
 
 const QuemSomosWrapper = styled.div`
   * {
-    background-color: #c03238;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     font-family: Futura;
   }
   .quemSomosHeader {
@@ -413,27 +503,10 @@ const QuemSomosWrapper = styled.div`
   }
 
   #quemSomosSubHeader {
-    display: flex;
-    flex-direction: row;
-  }
-  #quemSomosSubHeader h3 {
-    font-size: 2em;
-    padding: 20px;
-    margin: 80px 100px;
-    vertical-align: middle;
-    border: solid 2px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    z-index: 1;
-  }
-  #quemSomosSubHeader img {
-    z-index: 0;
-    border-radius: 50%;
-    width: 100%;
-    align-items: center;
+    width: 40%;
     margin: auto;
-    padding: 20px 80px;
+    padding-top: 1.5em;
+    text-align: justify;
   }
   .quemSomosBody {
     margin: 0;
@@ -445,35 +518,7 @@ const QuemSomosWrapper = styled.div`
     text-align: center;
     text-decoration: underline;
   }
-  #missao {
-    text-align: center;
-    padding: 40px;
-  }
-  #visao {
-    text-align: center;
-    padding: 40px;
-  }
-  #valores {
-    text-align: center;
-    padding: 40px 120px;
-  }
-  #ondaBranca1 {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 0;
-    background: rgba(0, 128, 0, 0);
-  }
-  #ondaBranca2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    transform: scaleX(-1);
-    background: rgba(0, 128, 0, 0);
-  }
   margin: 0;
-
   .fotoPerfil img {
     max-width: 100%;
     height: auto;
@@ -499,17 +544,14 @@ const QuemSomosWrapper = styled.div`
     .quemSomosHeader {
       width: 100%;
     }
-
+    .quemSomosHeader h1 {
+      padding: 0;
+      font-size: 2.6em;
+    }
     #quemSomosSubHeader {
       display: flex;
       flex-direction: column;
-    }
-    #quemSomosSubHeader h3 {
-      z-index: 1;
-    }
-    #quemSomosSubHeader img {
-      width: 85%;
-      padding: 20px;
+      width: 90%;
     }
     .quemSomosBody {
       display: flex;
@@ -519,9 +561,6 @@ const QuemSomosWrapper = styled.div`
       margin: 0;
       padding-top: 0;
     }
-    #ondaBranca2 {
-      display: none;
-    }
     #perfis {
       flex-direction: column;
     }
@@ -530,46 +569,13 @@ const QuemSomosWrapper = styled.div`
     }
   }
   @media only screen and (max-width: 480px) {
-    #quemSomosSubHeader h3 {
-      font-size: 1.5em;
-      margin: 40px 50px;
-    }
-    #ondaBranca1 {
-      width: 85%;
-    }
-    #valores {
-      margin: 0;
-      padding: 20px 40px;
-    }
-    #missao {
-      padding: 20px 40px;
-    }
-    #visao {
-      padding: 20px 40px;
-    }
+  
     .fotoPerfil {
       padding: 40px 20px;
     }
   }
   @media only screen and (max-width: 320px) {
-    #quemSomosSubHeader h3 {
-      font-size: 1.2em;
-      margin: 40px auto;
-      width: 75%;
-    }
-    #ondaBranca1 {
-      width: 75%;
-    }
-    #valores {
-      margin: 0;
-      padding: 20px 40px;
-    }
-    #missao {
-      padding: 20px 40px;
-    }
-    #visao {
-      padding: 20px 40px;
-    }
+    #
   }
 `
 
@@ -578,35 +584,10 @@ const QuemSomos = () => (
     <div className="quemSomosHeader" id="quemsomos">
       <h1>QUEM SOMOS</h1>
       <div id="quemSomosSubHeader">
-        <h3>
-          O restaurante Odara traz uma proposta de ancestralidade e valorização
-          da cultura e da gastronomia afro-brasileira.
-        </h3>
-        <img src={fotoQuemSomos} alt="Pimentas Odara" />
-      </div>
-      <img src={ondaBranca} alt="Onda branca" id="ondaBranca1" />
-      <img src={ondaBranca} alt="Onda branca" id="ondaBranca2" />
-    </div>
-    <div className="quemSomosBody">
-      <div id="missao">
-        <h2>MISSÃO</h2>
-        <h3>
-          Fornecer aos seus clientes a história e a cultura afro-brasileira
-          através do sabor.
-        </h3>
-      </div>
-      <div id="visao">
-        <h2>VISÃO</h2>
-        <h3>
-          Expansão da gastronomia afro-brasileira, respeitando a tradição, e a
-          ancestralidade.
-        </h3>
-      </div>
-      <div id="valores">
-        <h2>VALORES</h2>
-        <h3>Ancestralidade</h3>
-        <h3>Respeito</h3>
-        <h3>Diversidade</h3>
+        <h4>
+          Somos uma empresa liderada por mulheres com o intuito de valorizar a gastronomia afro-brasileira e outras vertentes culturais, como autores, pintores e músicos, artistas em geral.
+          Nosso restaurante é composto por três cozinheiras que se conheceram trabalhando em outros locais e resolveram se juntar para compartilhar seus conhecimentos. O Odara vai além de um restaurante, é um local para cursos, aulas e sobre a história da gastronomia brasileira.
+        </h4>
       </div>
     </div>
     <div id="perfis">
@@ -628,8 +609,8 @@ const QuemSomos = () => (
 
 const EventosWrapper = styled.div`
   * {
-    background-color: #c03238;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
   }
 
   h1 {
@@ -748,59 +729,23 @@ const produtos = [
   {
     nome: "COCADA EM CALDA",
     peso: "350g",
-    preco: "15,00",
+    preco: "20,00",
     sabores: ["caju", "maracujá", "siriguela", "abacaxi ao vinho"],
   },
-  { nome: "DOCE DE ABÓBORA COM COCO", peso: "350g", preco: "18,00" },
-  { nome: "DOCE DE BANANA", peso: "350g", preco: "10,00" },
-  { nome: "DOCE DE LEITE", peso: "350g", preco: "15,00" },
-  {
-    nome: "GELEIA DE FRUTAS",
-    peso: "350g",
-    preco: "15,00",
-    sabores: [
-      "uva",
-      "cajá",
-      "umbu",
-      "goiaba",
-      "acerola",
-      "abacaxi",
-      "maracujá",
-    ],
-  },
-  { nome: "TARECO DE RAPADURA", peso: "350g", preco: "15,00" },
-  { nome: "BISCOITINHOS DE BATATA DOCE", peso: "350g", preco: "15,00" },
-  { nome: "AMANTEIGADO ROMEU E JULIETA", peso: "350g", preco: "15,00" },
-  { nome: "GELEIA DE PIMENTA DE CHEIRO SUAVE", peso: "350g", preco: "15,00" },
-  { nome: "GELEIA DE PIMENTA DE CHEIRO PICANTE", peso: "350g", preco: "15,00" },
-  {
-    nome: "GELEIA DE PIMENTA DE CHEIRO SABORIZADA",
-    peso: "350g",
-    preco: "20,00",
-    sabores: ["laranja", "abacaxi", "maracujá", "damasco"],
-  },
-  {
-    nome: "COMPOTAS",
-    peso: "350g",
-    saboresCompotas: [
-      { nome: "jaca", preco: "15,00" },
-      { nome: "caju", preco: "15,00" },
-      { nome: "jambo", preco: "15,00" },
-      { nome: "goiaba", preco: "12,00" },
-      { nome: "abacaxi", preco: "12,00" },
-      { nome: "carambola", preco: "15,00" },
-    ],
-    obs:
-      "as compotas estarão disponíveis de acordo com a sazonalidade das frutas. Consultar disponibilidade",
-  },
+  { nome: "DOCE DE ABÓBORA COM COCO", peso: "350g", preco: "23,00" },
+  { nome: "DOCE DE BANANA", peso: "350g", preco: "15,00" },
+  { nome: "DOCE DE LEITE", peso: "350g", preco: "20,00" },
+  { nome: "TARECO DE RAPADURA", peso: "350g", preco: "20,00" },
 ]
 
 export default () => (
   <Layout>
     <Home />
     <QuemSomos />
-    <Lojinha produtos={produtos} />
     <Horario />
+    <Local />
+    <Cardapio />
+    <Lojinha produtos={produtos} />
     <Eventos />
   </Layout>
 )
