@@ -533,7 +533,14 @@ const QuemSomosWrapper = styled.div`
     text-align: center;
     padding: 80px 0;
   }
+  .fotoPerfil p {
+    padding: 1em 2em;
+    text-align: justify;
+  }
 
+  .fotoPerfil h2 {
+    padding-top: 1em;
+  }
   #perfis {
     display: flex;
     flex-direction: row;
@@ -567,6 +574,9 @@ const QuemSomosWrapper = styled.div`
     .fotoPerfil {
       padding: 40px 0;
     }
+    .fotoPerfil p {
+      padding: 1em 0;
+    }
   }
   @media only screen and (max-width: 480px) {
   
@@ -594,14 +604,17 @@ const QuemSomos = () => (
       <div class="fotoPerfil">
         <img src={perfilNil} alt="Ivanilda Luz" />
         <h2>Ivanilda Luz</h2>
+        <p>Nil é uma mistura debochada de paulista com alagoana, sempre dizendo que quer muito ir a praia, mas nunca indo, com sua péssima memória esquece que aqui é só atravessar a rua para chegar no mar. Teve seu primeiro contato com a gastronomia bem pequena por meio de sua mãe; através de sua religião de matriz africana entende que comida foi feita para compartilhar e que o alimento é algo sagrado, se desenvolveu profissionalmente na gastronomia em outros restaurantes, sendo cozinheira no Restaurante Sur e comandando a cozinha do Cambito, no entanto filha de Iemanjá com Ogum sua cozinha sempre foi de raiz ancestral, daí surgiu a ideia do restaurante odara, onde a mesma comanda a cozinha.</p>
       </div>
       <div class="fotoPerfil">
         <img src={perfilMari} alt="Mariana Nogueira" />
         <h2>Mariana Nogueira</h2>
+        <p>Mari, nascida em Arapiraca é filha de uma alagoana com um mineiro e leva essa mistura para sua cozinha; cresceu no meio da fazenda criando animais e plantando pequenas folhas e tubérculos. Desde pequena se interessava pela gastronomia e aperreava seus pais e sua avó enquanto cozinhavam, o que continua fazendo com suas colegas de trabalho, pois fala pelos cotovelos e é ligada no 220v. Fez faculdade na Maurício de Nassau e um curso no Laurent Sudeau, trabalhou em alguns restaurantes por Maceió, tais como o SuR, Asia Bistrô, Boteco do mar e Fundo de quintal, delivery que abriu com seu irmão durante a pandemia, atualmente comanda o fogão do Odara com a Nil.</p>
       </div>
       <div class="fotoPerfil">
         <img src={perfilAnne} alt="Anne Soares" id="fotoAnne" />
         <h2>Anne Soares</h2>
+        <p>Anne, como uma boa maceioense é rata de praia, adora comer e é eclética desde a música até suas profissões, se formou em gastronomia na Maurício de Nassau e agora cursa design na Ufal. Aprendeu a fazer doces com sua tia quando se juntavam para fazer reuniões familiares, coisa que ela não admite, mas ama. Desde nova começou a comercializar por conta própria seus produtos, nos últimos anos trabalhou no Restaurante SuR na parte de entradas e sobremesas, aqui no Odara conseguiu unir as duas profissões desenvolvendo toda a parte gráfica do restaurante e atuando como cozinheira.</p>
       </div>
     </div>
   </QuemSomosWrapper>
