@@ -1,10 +1,10 @@
-import React, {useState} from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Layout from "../components/layout"
 import "../../static/fonts/fonts.css"
 import "bootstrap/dist/css/bootstrap.min.css"
-import Carousel from "react-bootstrap/Carousel"
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import ButtonGroup from "react-bootstrap/ButtonGroup"
+import Tabletop from "tabletop"
 //import de imagens
 import logo from "./logoPrincipal.png"
 import email from "./email.png"
@@ -13,18 +13,8 @@ import fotoLoja from "./fotoLoja.jpeg"
 import perfilNil from "./perfilNil.jpeg"
 import perfilMari from "./perfilMari.jpeg"
 import perfilAnne from "./perfilAnne.jpeg"
-import ara1 from "./ara1.jpeg"
-import ara2 from "./ara2.jpeg"
-import ara3 from "./ara3.jpeg"
-import ara4 from "./ara4.jpeg"
-import pia1 from "./pia1.jpeg"
-import pia2 from "./pia2.jpeg"
-import pia3 from "./pia3.jpeg"
-import pia4 from "./pia4.jpeg"
-import pia5 from "./pia5.jpeg"
-import outros1 from "./outros1.jpeg"
-import outros2 from "./outros2.jpeg"
-import outros3 from "./outros3.jpeg"
+import iconIfood from "../images/ifood.svg"
+import iconInstaD from "../images/instadelivery-logo.png"
 import cardapioAlmoco from "../images/cardapio-almoco.png"
 import cardapioJantar from "../images/cardapio-jantar.png"
 import cardapioBebidas from "../images/cardapio-bebidas.png"
@@ -80,7 +70,9 @@ const HorarioWrapper = styled.div`
     display: flex;
     justify-content: center;
   }
-  table, th, td {
+  table,
+  th,
+  td {
     border-bottom: 4px solid black;
     margin: 0;
     padding: 1em 2em 0 0;
@@ -159,25 +151,29 @@ const LocalWrapper = styled.div`
 
 const Local = () => {
   const iframe = {
-    __html: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.2634055616845!2d-35.717907685601425!3d-9.658520104700003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7014581b681cb19%3A0xec78e60733405054!2sOdara%20Restaurante!5e0!3m2!1spt-BR!2sbr!4v1607265407544!5m2!1spt-BR!2sbr" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>'
+    __html:
+      '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.2634055616845!2d-35.717907685601425!3d-9.658520104700003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7014581b681cb19%3A0xec78e60733405054!2sOdara%20Restaurante!5e0!3m2!1spt-BR!2sbr!4v1607265407544!5m2!1spt-BR!2sbr" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>',
   }
   return (
     <LocalWrapper>
       <h1>LOCAL</h1>
       <h2>Avenida Brasil, 807 - Poço</h2>
-      <div id='mapa' dangerouslySetInnerHTML={iframe} />
+      <div id="mapa" dangerouslySetInnerHTML={iframe} />
     </LocalWrapper>
   )
 }
 
 const CardapioWrapper = styled.div`
-  height: 1300px;
+  height: 1800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  padding: 1em 0;
   h1 {
     font-size: 4em;
     padding-top: 1em;
+    align-self: center;
   }
   #selectorCardapio {
     display: flex;
@@ -197,64 +193,117 @@ const CardapioWrapper = styled.div`
     align-self: center;
     padding: 2em 0;
   }
+  .cardPedido {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    text-align: center;
+    margin: 0.5em 0;
+    padding: 2em 0;
+    align-items: center;
+    background-color: #ffee6e;
+    border: solid 8px;
+    width: 50%;
+  }
+  .cardPedido h2 {
+    text-align: center;
+    padding: 1em 0 0 1em;
+  }
+  .cardPedido a {
+    text-decoration: underline;
+    color: #000;
+  }
+  .cardPedido img {
+    align-self: center;
+    padding: 1em 0;
+    width: 25%;
+  }
+  #ifood img {
+    width: 15%;
+  }
   @media only screen and (max-width: 480px) {
+    padding: 1em 0;
     #imageSelected {
       align-self: center;
       margin: auto;
-    }
-    img {
       align-self: center;
-      width: 95%;
+      width: 90%;
       margin: auto;
     }
     #selector {
       padding: 2em 0;
     }
+    .cardPedido {
+      width: 90%;
+      flex-direction: column;
+      padding: 1em 0;
+    }
+    .cardPedido img {
+      width: 90%;
+      padding: 0;
+    }
+    .cardPedido h2 {
+      padding: 0;
+    }
+    #ifood img {
+      width: 50%;
+    }
   }
 `
 
 const Cardapio = () => {
-  const [radioValue, setRadioValue] = useState('1');
+  const [radioValue, setRadioValue] = useState("1")
 
   const radios = [
-    {name: 'Almoço', value: '1'},
-    {name: 'Jantar', value: '2'},
-    {name: 'Bebidas', value: '3'},
-  ];
+    { name: "Almoço", value: "1" },
+    { name: "Jantar", value: "2" },
+    { name: "Bebidas", value: "3" },
+  ]
 
-  let images;
-  if (radioValue === '1') {
-    images = <img src={cardapioAlmoco} alt='cardápio almoço'></img>
-  } else if (radioValue === '2') {
-    images = <img src={cardapioJantar} alt='cardápio jantar'></img>
+  let images
+  if (radioValue === "1") {
+    images = <img src={cardapioAlmoco} alt="cardápio almoço"></img>
+  } else if (radioValue === "2") {
+    images = <img src={cardapioJantar} alt="cardápio jantar"></img>
   } else {
-    images = <img src={cardapioBebidas} alt='cardápio bebida'></img>
+    images = <img src={cardapioBebidas} alt="cardápio bebida"></img>
   }
-  
+
   return (
     <CardapioWrapper>
       <h1>CARDAPIO</h1>
-      <div id='selectorCardapio'>
-        <div id='selector'>
-         <ButtonGroup toggle>
-          {radios.map((radio, idx) => (
-            <ToggleButton
-              key={idx}
-              type='radio'
-              variant='secondary'
-              name='radio'
-              value={radio.value}
-              checked={radioValue === radio.value}
-              onChange={(e) => setRadioValue(e.currentTarget.value)}
-            >
-              {radio.name}
-            </ToggleButton>
-          ))}
-         </ButtonGroup>
+      <div id="selectorCardapio">
+        <div id="selector">
+          <ButtonGroup toggle>
+            {radios.map((radio, idx) => (
+              <ToggleButton
+                key={idx}
+                type="radio"
+                variant="secondary"
+                name="radio"
+                value={radio.value}
+                checked={radioValue === radio.value}
+                onChange={e => setRadioValue(e.currentTarget.value)}
+              >
+                {radio.name}
+              </ToggleButton>
+            ))}
+          </ButtonGroup>
         </div>
-        <div id='imageSelected'>
-            {images}
-        </div>
+        <div id="imageSelected">{images}</div>
+      </div>
+      <div id="instadelivery" className="cardPedido">
+        <img src={iconInstaD} alt="insta delivery"></img>
+        <a href="https://instadelivery.com.br/odararestaurante">
+          <h2>Pedir no InstaDelivery</h2>
+        </a>
+      </div>
+      <div id="ifood" className="cardPedido">
+        <img src={iconIfood} alt="ifood"></img>
+        <a href="https://www.ifood.com.br/delivery/maceio-al/odara-delivery-poco/e0749a5f-cd49-4178-bdc9-fd58190ea008">
+          <h2>Pedir no iFood</h2>
+        </a>
       </div>
     </CardapioWrapper>
   )
@@ -286,10 +335,10 @@ const LojinhaWrapper = styled.div`
   }
   #lojaContato {
     margin: 60px;
-    border-style: solid;
+    border: solid 8px;
     padding: 20px;
-    background-color: #fff;
     font-size: 2em;
+    background-color: #ffee6e;
   }
   #lojaContato h2 {
     margin-left: 20px;
@@ -382,7 +431,7 @@ const LojinhaWrapper = styled.div`
       width: 65%;
     }
     #lojaContato {
-        margin: 20px;
+      margin: 20px;
     }
   }
   @media only screen and (max-width: 420px) {
@@ -579,13 +628,12 @@ const QuemSomosWrapper = styled.div`
     }
   }
   @media only screen and (max-width: 480px) {
-  
     .fotoPerfil {
       padding: 40px 20px;
     }
   }
   @media only screen and (max-width: 320px) {
-    #
+    #;
   }
 `
 
@@ -595,8 +643,13 @@ const QuemSomos = () => (
       <h1>QUEM SOMOS</h1>
       <div id="quemSomosSubHeader">
         <h4>
-          Somos uma empresa liderada por mulheres com o intuito de valorizar a gastronomia afro-brasileira e outras vertentes culturais, como autores, pintores e músicos, artistas em geral.
-          Nosso restaurante é composto por três cozinheiras que se conheceram trabalhando em outros locais e resolveram se juntar para compartilhar seus conhecimentos. O Odara vai além de um restaurante, é um local para cursos, aulas e sobre a história da gastronomia brasileira.
+          Somos uma empresa liderada por mulheres com o intuito de valorizar a
+          gastronomia afro-brasileira e outras vertentes culturais, como
+          autores, pintores e músicos, artistas em geral. Nosso restaurante é
+          composto por três cozinheiras que se conheceram trabalhando em outros
+          locais e resolveram se juntar para compartilhar seus conhecimentos. O
+          Odara vai além de um restaurante, é um local para cursos, aulas e
+          sobre a história da gastronomia brasileira.
         </h4>
       </div>
     </div>
@@ -604,136 +657,148 @@ const QuemSomos = () => (
       <div class="fotoPerfil">
         <img src={perfilNil} alt="Ivanilda Luz" />
         <h2>Ivanilda Luz</h2>
-        <p>Nil é uma mistura debochada de paulista com alagoana, sempre dizendo que quer muito ir a praia, mas nunca indo, com sua péssima memória esquece que aqui é só atravessar a rua para chegar no mar. Teve seu primeiro contato com a gastronomia bem pequena por meio de sua mãe; através de sua religião de matriz africana entende que comida foi feita para compartilhar e que o alimento é algo sagrado, se desenvolveu profissionalmente na gastronomia em outros restaurantes, sendo cozinheira no Restaurante Sur e comandando a cozinha do Cambito, no entanto filha de Iemanjá com Ogum sua cozinha sempre foi de raiz ancestral, daí surgiu a ideia do restaurante odara, onde a mesma comanda a cozinha.</p>
+        <p>
+          Nil é uma mistura debochada de paulista com alagoana, sempre dizendo
+          que quer muito ir a praia, mas nunca indo, com sua péssima memória
+          esquece que aqui é só atravessar a rua para chegar no mar. Teve seu
+          primeiro contato com a gastronomia bem pequena por meio de sua mãe;
+          através de sua religião de matriz africana entende que comida foi
+          feita para compartilhar e que o alimento é algo sagrado, se
+          desenvolveu profissionalmente na gastronomia em outros restaurantes,
+          sendo cozinheira no Restaurante Sur e comandando a cozinha do Cambito,
+          no entanto filha de Iemanjá com Ogum sua cozinha sempre foi de raiz
+          ancestral, daí surgiu a ideia do restaurante odara, onde a mesma
+          comanda a cozinha.
+        </p>
       </div>
       <div class="fotoPerfil">
         <img src={perfilMari} alt="Mariana Nogueira" />
         <h2>Mariana Nogueira</h2>
-        <p>Mari, nascida em Arapiraca é filha de uma alagoana com um mineiro e leva essa mistura para sua cozinha; cresceu no meio da fazenda criando animais e plantando pequenas folhas e tubérculos. Desde pequena se interessava pela gastronomia e aperreava seus pais e sua avó enquanto cozinhavam, o que continua fazendo com suas colegas de trabalho, pois fala pelos cotovelos e é ligada no 220v. Fez faculdade na Maurício de Nassau e um curso no Laurent Sudeau, trabalhou em alguns restaurantes por Maceió, tais como o SuR, Asia Bistrô, Boteco do mar e Fundo de quintal, delivery que abriu com seu irmão durante a pandemia, atualmente comanda o fogão do Odara com a Nil.</p>
+        <p>
+          Mari, nascida em Arapiraca é filha de uma alagoana com um mineiro e
+          leva essa mistura para sua cozinha; cresceu no meio da fazenda criando
+          animais e plantando pequenas folhas e tubérculos. Desde pequena se
+          interessava pela gastronomia e aperreava seus pais e sua avó enquanto
+          cozinhavam, o que continua fazendo com suas colegas de trabalho, pois
+          fala pelos cotovelos e é ligada no 220v. Fez faculdade na Maurício de
+          Nassau e um curso no Laurent Sudeau, trabalhou em alguns restaurantes
+          por Maceió, tais como o SuR, Asia Bistrô, Boteco do mar e Fundo de
+          quintal, delivery que abriu com seu irmão durante a pandemia,
+          atualmente comanda o fogão do Odara com a Nil.
+        </p>
       </div>
       <div class="fotoPerfil">
         <img src={perfilAnne} alt="Anne Soares" id="fotoAnne" />
         <h2>Anne Soares</h2>
-        <p>Anne, como uma boa maceioense é rata de praia, adora comer e é eclética desde a música até suas profissões, se formou em gastronomia na Maurício de Nassau e agora cursa design na Ufal. Aprendeu a fazer doces com sua tia quando se juntavam para fazer reuniões familiares, coisa que ela não admite, mas ama. Desde nova começou a comercializar por conta própria seus produtos, nos últimos anos trabalhou no Restaurante SuR na parte de entradas e sobremesas, aqui no Odara conseguiu unir as duas profissões desenvolvendo toda a parte gráfica do restaurante e atuando como cozinheira.</p>
+        <p>
+          Anne, como uma boa maceioense é rata de praia, adora comer e é
+          eclética desde a música até suas profissões, se formou em gastronomia
+          na Maurício de Nassau e agora cursa design na Ufal. Aprendeu a fazer
+          doces com sua tia quando se juntavam para fazer reuniões familiares,
+          coisa que ela não admite, mas ama. Desde nova começou a comercializar
+          por conta própria seus produtos, nos últimos anos trabalhou no
+          Restaurante SuR na parte de entradas e sobremesas, aqui no Odara
+          conseguiu unir as duas profissões desenvolvendo toda a parte gráfica
+          do restaurante e atuando como cozinheira.
+        </p>
       </div>
     </div>
   </QuemSomosWrapper>
 )
 
 const EventosWrapper = styled.div`
-  * {
-    background-color: #fff;
-    color: #000;
-  }
-
-  h1 {
-    padding: 50px 0 50px 0;
-    font-size: 4em;
-    font-family: African;
-    text-align: center;
-    margin: 0;
-  }
-  .evento {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
-  .carousel {
-      padding: 30px 80px;
-  }
-.slideGrande {
-      max-width: 40%;
-      margin: auto;
-      height: auto;
-}
-.slideGrande2 {
-    max-width: 50%;
-    margin: auto;
-}
-.slideGrande3 {
-    max-width: 85%;
-    margin: auto;
-}
-@media only screen and (max-width: 720px) {
-    .carousel {
-        padding: 30px 20px;
+  @media only screen and (max-width: 480px) {
+    h1 {
+      font-size: 3em;
     }
-}
-@media only screen and (max-width: 480px) {
-  .carousel {
-      padding: 20px 10px;
   }
-  .evento h2 {
-    font-size: 1em;
-  }
-  h1 {
-    font-size: 3em;
-  }
-}
 `
+const Titulo = styled.h1`
+  padding: 50px 0 0 0;
+  font-size: 4em;
+  font-family: African;
+  margin: 0;
+`
+const TabelaStyle = styled.table`
+  width: 75%;
+  margin: 2em auto;
+  padding: 4em 0;
+  td {
+    margin: 0;
+    text-align: left;
+    font-size: 1.5em;
+  }
+  .mesEvento {
+    font-size: 1em;
+    background-color: #ffee6e;
+    color: #000;
+    padding: 1em 0 1em 1em;
+  }
+  .rowEvento td {
+    border-bottom: 2px solid #000;
+    padding: 0 1em;
+  }
+  @media only screen and (max-width: 480px) {
+    .rowEvento td {
+      padding: 0 0.5em;
+      font-size: 1.4em;
+    }
+  }
+`
+const ListEvents = (props) => {
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    Tabletop.init({
+      key: "1VOxmevLEGekXFnwp0JJ8RXFqvQSxB86K5aUxvcbB8cI",
+      simpleSheet: true,
+    })
+      .then(data => setData(data))
+      .catch(err => console.warn(err))
+  }, [])
+
+  return (
+    <TabelaStyle>
+        {data.map((item, i) => (
+          item.Mes === props.mes &&
+            <tr id={i} class='rowEvento'>
+              <td>
+                <a href={item.Link}>{item.Evento}</a>
+              </td>
+              <td>{item.Data}</td>
+              <td>{item.Hora}</td>
+            </tr>
+        ))}
+    </TabelaStyle>
+  )
+}
+
+const Tabela = () => {
+  return (
+    <tbody>
+      <tr>
+        <td class="mesEvento">JANEIRO</td>
+      </tr>
+      <ListEvents mes='Janeiro' />
+      <tr>
+        <td class="mesEvento">FEVEREIRO</td>
+      </tr>
+      <ListEvents mes='Fevereiro' />
+      <tr>
+        <td class="mesEvento">MARÇO</td>
+      </tr>
+      <ListEvents mes='Março' />
+    </tbody>
+  )
+}
 
 const Eventos = () => {
   return (
     <EventosWrapper>
-      <h1>EVENTOS</h1>
-      <div class="evento">
-        <h2>Palestra Sabores e Saberes - Arapiraca</h2>
-        <div class="carousel">
-          <Carousel>
-            <Carousel.Item>
-              <img className="d-block w-100" src={ara3} alt="Primeiro slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100" src={ara4} alt="Segundo slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100" src={ara2} alt="Terceiro slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100 slideGrande" src={ara1} alt="Quarto slide" />
-            </Carousel.Item>
-          </Carousel>
-        </div>
-      </div>
-      <div class="evento">
-        <h2>Palestra Sabores e Saberes - Piaçabuçu</h2>
-        <div class="carousel">
-          <Carousel>
-            <Carousel.Item>
-              <img className="d-block w-100" src={pia1} alt="Primeiro slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100" src={pia2} alt="Segundo slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100 slideGrande" src={pia3} alt="Terceiro slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100" src={pia4} alt="Quarto slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100" src={pia5} alt="Quarto slide" />
-            </Carousel.Item>
-          </Carousel>
-        </div>
-      </div>
-      <div class="evento">
-        <h2>Outros eventos</h2>
-        <div class="carousel">
-          <Carousel>
-            <Carousel.Item>
-              <img className="d-block w-100 slideGrande3" src={outros1} alt="Primeiro slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100 slideGrande3" src={outros2} alt="Segundo slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-              <img className="d-block w-100 slideGrande2" src={outros3} alt="Terceiro slide" />
-            </Carousel.Item>
-          </Carousel>
-        </div>
-      </div>
+      <Titulo>EVENTOS</Titulo>
+      <TabelaStyle>
+        <Tabela />
+      </TabelaStyle>
     </EventosWrapper>
   )
 }

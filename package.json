@@ -34,6 +34,7 @@
     "react-icons": "^3.10.0",
     "react-typography": "^0.16.19",
     "styled-components": "^5.1.0",
+    "tabletop": "^1.6.3",
     "typography": "^0.16.19",
     "typography-theme-fairy-gates": "^0.16.19"
   },
