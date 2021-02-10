@@ -590,6 +590,10 @@ const QuemSomosWrapper = styled.div`
   .fotoPerfil h2 {
     padding-top: 1em;
   }
+  .fotoPerfil:hover {
+    scale: 1.05;
+    transition: scale 1s;
+  }
   #perfis {
     display: flex;
     flex-direction: row;
@@ -795,7 +799,7 @@ const Tabela = () => {
 const Eventos = () => {
   return (
     <EventosWrapper>
-      <Titulo>EVENTOS</Titulo>
+      <Titulo id="evento">EVENTOS</Titulo>
       <TabelaStyle>
         <Tabela />
       </TabelaStyle>

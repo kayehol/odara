@@ -176,11 +176,13 @@ const MenuGrandeWrapper = styled.div`
   }
   ul li:hover {
     background-color: #c03238;
+    transition: background-color 1s;
   }
   @media only screen and  (max-width: 720px){
     ul li {
         display: none;
     }
+  }
 `
 
 const MenuGrande = () => (
@@ -217,7 +219,7 @@ const MenuGrande = () => (
         </a>
       </li>
       <li>
-        <a href="#eventos">
+        <a href="#evento">
           EVENTOS
         </a>
       </li>
